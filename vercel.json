@@ -2,11 +2,5 @@
   "buildCommand": "npm install",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "express",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
-    }
-  ]
+  "framework": "express"
 }
