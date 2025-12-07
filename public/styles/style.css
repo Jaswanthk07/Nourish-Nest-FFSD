@@ -249,6 +249,12 @@ nav li:first-child {
   color: #29d978;
 }
 
+.si.admin-user {
+  color: #27ae60;
+  border-color: #27ae60;
+  font-weight: bold;
+}
+
 .heading {
   text-align: center;
   color: #29d978;
