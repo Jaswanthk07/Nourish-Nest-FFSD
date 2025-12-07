@@ -25,10 +25,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   color: #4e342e;
-  position: sticky;
+  position: relative;
+  min-height: 100vh;
 }
 
 .wrapper {
@@ -230,10 +231,6 @@ header {
 }
 
 @media only screen and (max-width: 786px) {
-  html {
-    font-size: 60%;
-  }
-
   .nav {
     position: fixed;
     top: 0;
@@ -242,9 +239,9 @@ header {
     align-items: center;
     width: 100%;
     height: auto;
-    min-height: 60px;
+    min-height: 55px;
     line-height: normal;
-    padding: 10px 15px;
+    padding: 8px 12px;
     margin: 0;
     flex-wrap: wrap;
   }
@@ -256,39 +253,43 @@ header {
   .nav-logo p {
     height: auto;
     line-height: normal;
-    padding: 5px 10px;
-    font-size: 1.5rem;
+    padding: 4px 8px;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
   }
 
+  .nav-logo p a {
+    color: #4e342e;
+  }
+
   .nav-button {
     display: flex !important;
-    gap: 8px;
+    gap: 6px;
   }
 
   .nav-button .btn {
-    width: 100px;
-    height: 35px;
-    font-size: 0.9rem;
-    padding: 5px 10px;
+    width: 85px;
+    height: 32px;
+    font-size: 0.8rem;
+    padding: 4px 8px;
   }
 
   #registerBtn {
-    margin-left: 8px;
+    margin-left: 6px;
   }
 
   .wrapper {
     min-height: 100vh;
-    padding-top: 80px;
+    padding-top: 70px;
   }
 
   .form-box {
     width: 95%;
-    max-width: 450px;
+    max-width: 420px;
     height: auto;
-    min-height: 400px;
-    padding: 20px;
+    min-height: 380px;
+    padding: 18px;
     border-radius: 10px;
   }
 
@@ -318,44 +319,41 @@ header {
   }
 
   header {
-    font-size: 1.8rem;
-    padding: 15px 0;
+    font-size: 1.5rem;
+    padding: 12px 0;
   }
 
   .two-forms {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .input-box {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 
   .input-field {
-    font-size: 0.95rem;
-    height: 45px;
-    padding: 0 10px 0 40px;
-    border-radius: 25px;
+    font-size: 0.9rem;
+    height: 40px;
+    padding: 0 10px 0 36px;
+    border-radius: 22px;
   }
 
   .input-box i {
-    top: -32px;
-    left: 12px;
+    top: -30px;
+    left: 10px;
+    font-size: 0.95rem;
   }
 
   .submit {
-    font-size: 0.95rem;
-    height: 40px;
-    margin-top: 10px;
-    border-radius: 25px;
+    font-size: 0.9rem;
+    height: 38px;
+    margin-top: 8px;
+    border-radius: 22px;
   }
 }
 
 @media only screen and (max-width: 540px) {
-  html {
-    font-size: 50%;
-  }
-
   body {
     overflow-x: hidden;
   }
@@ -365,8 +363,8 @@ header {
     top: 0;
     width: 100%;
     height: auto;
-    min-height: 50px;
-    padding: 8px 10px;
+    min-height: 48px;
+    padding: 6px 8px;
     margin: 0;
     display: flex;
     justify-content: space-between;
@@ -380,8 +378,8 @@ header {
 
   .nav-logo p {
     height: auto;
-    padding: 3px 8px;
-    font-size: 1.2rem;
+    padding: 2px 6px;
+    font-size: 1rem;
     line-height: normal;
   }
 
@@ -391,36 +389,36 @@ header {
 
   .nav-button {
     display: flex !important;
-    gap: 5px;
+    gap: 4px;
     flex-basis: 100%;
     justify-content: flex-end;
-    padding-top: 8px;
+    padding-top: 6px;
     border-top: 1px solid rgba(62, 180, 137, 0.2);
   }
 
   .nav-button .btn {
-    width: 90px;
-    height: 32px;
-    font-size: 0.8rem;
-    padding: 4px 8px;
+    width: 75px;
+    height: 28px;
+    font-size: 0.75rem;
+    padding: 3px 6px;
   }
 
   #registerBtn {
-    margin-left: 5px;
+    margin-left: 4px;
   }
 
   .wrapper {
     min-height: 100vh;
-    padding-top: 120px;
-    padding-bottom: 20px;
+    padding-top: 100px;
+    padding-bottom: 15px;
   }
 
   .form-box {
     width: 100%;
     max-width: 95vw;
     height: auto;
-    min-height: 380px;
-    padding: 15px;
+    min-height: 340px;
+    padding: 12px;
     border-radius: 8px;
     overflow: visible;
   }
@@ -459,48 +457,48 @@ header {
   }
 
   .top span {
-    font-size: 0.75rem;
-    padding: 8px 0;
+    font-size: 0.7rem;
+    padding: 6px 0;
   }
 
   .top span a {
-    margin-left: 3px;
-    font-size: 0.75rem;
+    margin-left: 2px;
+    font-size: 0.7rem;
   }
 
   header {
     color: #4e342e;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: center;
-    padding: 12px 0 20px 0;
+    padding: 10px 0 15px 0;
   }
 
   .input-box {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     position: relative;
   }
 
   .input-field {
-    font-size: 0.9rem;
-    height: 42px;
+    font-size: 0.85rem;
+    height: 38px;
     width: 100%;
-    padding: 0 10px 0 38px;
-    border-radius: 22px;
+    padding: 0 8px 0 34px;
+    border-radius: 20px;
   }
 
   .input-box i {
     position: relative;
-    top: -35px;
-    left: 12px;
-    font-size: 1.1rem;
+    top: -32px;
+    left: 10px;
+    font-size: 1rem;
   }
 
   .submit {
-    font-size: 0.9rem;
-    height: 38px;
+    font-size: 0.85rem;
+    height: 35px;
     width: 100%;
-    border-radius: 22px;
-    margin-top: 8px;
+    border-radius: 20px;
+    margin-top: 6px;
     cursor: pointer;
   }
 
@@ -515,19 +513,20 @@ header {
   }
 
   .two {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .two input {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
   }
 
   .two label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .two label a {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 

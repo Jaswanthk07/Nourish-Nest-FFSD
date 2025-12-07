@@ -21,6 +21,11 @@ html::-webkit-scrollbar {
   width: 0.5rem;
 }
 
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
 section {
   padding: 3rem 9%;
 }
@@ -595,19 +600,29 @@ img {
 
   nav li {
     height: auto;
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: lighter;
     font-family: "Poppins", sans-serif;
     padding: 0.5rem 0;
   }
 
   nav li:first-child {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: bolder;
   }
 
   nav ul {
     flex-wrap: wrap;
+  }
+
+  nav a {
+    padding: 0.8rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  nav a svg {
+    width: 20px;
+    height: 20px;
   }
 
   .hideOnMobile {
@@ -631,6 +646,18 @@ img {
     padding: 0.8rem 0;
   }
 
+  .sidebar a,
+  .sidebar button {
+    padding: 0.8rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  .sidebar a svg,
+  .sidebar button svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .about .row {
     flex-direction: column;
     gap: 1.5rem;
@@ -642,40 +669,29 @@ img {
   }
 
   .about .row .content h3 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 
   .about .row .content ul li {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .diet .controls {
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: 1rem;
   }
 
   .diet .image-container {
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     gap: 1rem;
   }
 
   .diet .image-container .box .image {
-    height: 20rem;
+    height: 18rem;
   }
 
   .footer .box-container {
     grid-template-columns: 1fr;
-  }
-
-  html {
-    font-size: 55%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-  }
-
-  html::-webkit-scrollbar {
-    width: 0.5rem;
   }
 
   #clock {
@@ -688,10 +704,11 @@ img {
 
   #clock p {
     text-align: center;
+    font-size: 1.6rem;
   }
 
   #clock p span {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin-top: 10px;
     margin-right: 10px;
     color: #29d978;
@@ -709,13 +726,13 @@ img {
   }
 
   .heading {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
   }
 
   .btn {
-    font-size: 1.5rem;
-    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
   }
 }
 
@@ -735,12 +752,22 @@ img {
   }
 
   nav a {
-    padding: 1rem 1.2rem;
-    font-size: 1.5rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  nav a svg {
+    width: 16px;
+    height: 16px;
   }
 
   nav li:first-child a {
-    font-size: 2rem;
+    font-size: 1.4rem;
+  }
+
+  nav li:first-child a svg {
+    width: 18px;
+    height: 18px;
   }
 
   .sidebar {
@@ -755,8 +782,14 @@ img {
 
   .sidebar a,
   .sidebar button {
-    padding: 0.8rem 1rem;
-    font-size: 1.4rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .sidebar a svg,
+  .sidebar button svg {
+    width: 14px;
+    height: 14px;
   }
 
   .home {
@@ -764,9 +797,9 @@ img {
   }
 
   .home .content h3 {
-    font-size: 2.5rem;
-    padding-top: 10rem;
-    padding-bottom: 2rem;
+    font-size: 1.8rem;
+    padding-top: 8rem;
+    padding-bottom: 1.5rem;
   }
 
   .about .row {
@@ -774,31 +807,31 @@ img {
   }
 
   .about .row .content h3 {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 
   .about .row .content ul li {
-    font-size: 1.3rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
   .diet .controls {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.8rem;
   }
 
   .diet .controls .buttons {
-    padding: 2rem 1rem;
-    margin-bottom: 1.5rem;
+    padding: 1.5rem 0.8rem;
+    margin-bottom: 1rem;
   }
 
   .diet .image-container {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.8rem;
   }
 
   .diet .image-container .box .image {
-    height: 15rem;
+    height: 12rem;
   }
 
   .footer .box-container {
@@ -806,27 +839,16 @@ img {
   }
 
   .footer .box-container .box h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .footer .box-container .box a {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   .footer .credit {
-    font-size: 1.5rem;
-    padding: 1rem;
-  }
-
-  html {
-    font-size: 45%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-  }
-
-  html::-webkit-scrollbar {
-    width: 0.25rem;
+    font-size: 1.1rem;
+    padding: 0.8rem;
   }
 
   #clock {
@@ -839,12 +861,13 @@ img {
 
   #clock p {
     text-align: center;
+    font-size: 1.2rem;
   }
 
   #clock p span {
-    font-size: 1.8rem;
-    margin-top: 10px;
-    margin-right: 10px;
+    font-size: 1rem;
+    margin-top: 8px;
+    margin-right: 8px;
     color: #29d978;
     font-weight: bold;
   }
@@ -852,12 +875,12 @@ img {
   .prev,
   .next,
   .text {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .dot {
-    height: 6px;
-    width: 6px;
+    height: 5px;
+    width: 5px;
   }
 
   section {
@@ -865,12 +888,23 @@ img {
   }
 
   .heading {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
   }
 
   .btn {
-    font-size: 1.2rem;
-    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .si {
+    padding: 0.6rem 1rem;
+    font-size: 1.1rem;
+  }
+
+  .si svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 0.4rem;
   }
 }
