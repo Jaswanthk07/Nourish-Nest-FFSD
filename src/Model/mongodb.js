@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-
 const NourishuserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -22,19 +21,23 @@ const NourishuserSchema = new mongoose.Schema({
   },
 });
 
-const Nourishuser = mongoose.model('Nourishuser', NourishuserSchema);
+const Nourishuser = mongoose.model("Nourishuser", NourishuserSchema);
 
 async function signUp(Firstname, Lastname, email, password) {
   try {
     const existingNourishuser = await Nourishuser.findOne({ email });
     if (existingNourishuser) {
-      return { success: false, message: 'Email already exists' };
+      return { success: false, message: "Email already exists" };
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); 
-    const newNourishuser = new Nourishuser({ name: Firstname + " " + Lastname, email, password: hashedPassword });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newNourishuser = new Nourishuser({
+      name: Firstname + " " + Lastname,
+      email,
+      password: hashedPassword,
+    });
     await newNourishuser.save();
-    
+
     return { success: true, message: Firstname };
   } catch (error) {
     return { success: false, message: error.message };
@@ -48,10 +51,13 @@ async function logIn(email, password) {
     if (!existingNourishuser) {
       return { success: false, message: "Invalid email/User doesn't exist" };
     }
-    const isPasswordCorrect = await bcrypt.compare(password, existingNourishuser.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingNourishuser.password
+    );
     if (isPasswordCorrect) {
       const fname = existingNourishuser.name.split(" ")[0];
-      return { success: true, message: fname };
+      return { success: true, message: fname, role: existingNourishuser.role };
     } else {
       return { success: false, message: "Invalid password" };
     }
@@ -60,7 +66,6 @@ async function logIn(email, password) {
     return { success: false, message: "An error occurred while logging in" };
   }
 }
-
 
 const getAdmin = async (req, res) => {
   const userId = req.user.email;
@@ -75,13 +80,12 @@ async function deleteUser(id) {
     const result = await Nourishuser.deleteOne({ _id: id });
     if (result.deletedCount > 0) {
       return { success: true };
-
     } else {
-      return { success: false, message: 'User not found or already deleted' };
+      return { success: false, message: "User not found or already deleted" };
     }
   } catch (error) {
-    console.error('Error deleting user:', error);
-    return { success: false, message: 'Error deleting user' };
+    console.error("Error deleting user:", error);
+    return { success: false, message: "Error deleting user" };
   }
 }
 

@@ -136,7 +136,12 @@ app.post("/login", async (req, res) => {
       console.log("You have successfully logged in");
       req.session.user = loginResult.message;
       req.session.isAuthenticated = true;
+      req.session.role = loginResult.role;
       res.cookie("user", loginResult.message, {
+        maxAge: 900000,
+        httpOnly: true,
+      });
+      res.cookie("role", loginResult.role, {
         maxAge: 900000,
         httpOnly: true,
       });
@@ -170,8 +175,9 @@ app.post("/signup", async (req, res) => {
     if (result.success) {
       req.session.user = Firstname;
       req.session.isAuthenticated = true;
+      req.session.role = "user";
       res.cookie("user", Firstname, { maxAge: 900000, httpOnly: true });
-      res.cookie("role", role || "user", { maxAge: 900000, httpOnly: true });
+      res.cookie("role", "user", { maxAge: 900000, httpOnly: true });
       res.cookie("isAuthenticated", "true", { maxAge: 900000, httpOnly: true });
       console.log(req.session.user);
       res.redirect("/index?role=user");
