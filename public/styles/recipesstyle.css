@@ -1,356 +1,599 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 /* Color Palette */
 :root {
-    --primary-color: #333333;
-    /* Dark Gray */
-    --secondary-color: #378ac2;
-    --tertiary-color: #dcd5ce;
-    /* Light Tan */
-    --background-color: #F9F9F9;
-    /* Off-White */
-    --box-color: #FFFFFF;
-    /* White */
-    --box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    --border-radius: 10px;
+  --primary-color: #333333;
+  /* Dark Gray */
+  --secondary-color: #378ac2;
+  --tertiary-color: #dcd5ce;
+  /* Light Tan */
+  --background-color: #f9f9f9;
+  /* Off-White */
+  --box-color: #ffffff;
+  /* White */
+  --box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  --border-radius: 10px;
 }
 
 /* General Styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--primary-color);
 }
 
 .title {
-    text-align: center;
-    padding-top: 1rem;
+  text-align: center;
+  padding-top: 1rem;
 }
 
 .title h1 {
-    font-size: 2.5rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--secondary-color);
-    font-weight: 700;
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+  font-weight: 700;
 }
 
 /* Container Styles */
 .recipes-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: grid;
-    grid-template-areas:
-        "title-image taste"
-        "summary summary"
-        "diets dish-types"
-        "recipe-steps recipe-steps"
-        "nutrition-info nutrition-info"
-        "properties caloric-breakdown";
-    grid-gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-areas:
+    "title-image taste"
+    "summary summary"
+    "diets dish-types"
+    "recipe-steps recipe-steps"
+    "nutrition-info nutrition-info"
+    "properties caloric-breakdown";
+  grid-gap: 20px;
 }
 
 /* Title and Image Styles */
 .recipes-title-image {
-    grid-area: title-image;
-    text-align: center;
+  grid-area: title-image;
+  text-align: center;
 }
 
 .recipes-title-image h1 {
-    font-size: 2.5rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--secondary-color);
-    font-weight: 700;
-    /* Bold */
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+  font-weight: 700;
+  /* Bold */
 }
 
 .recipes-image {
-
-    width: 600px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  width: 600px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 /* Taste Styles */
 .recipes-taste {
-    grid-area: taste;
-    width: 600px;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: taste;
+  width: 600px;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .recipes-taste h2,
 h3 {
-    margin-top: 0;
-    color: var(--secondary-color);
-    font-weight: 700;
+  margin-top: 0;
+  color: var(--secondary-color);
+  font-weight: 700;
 }
 
 .recipes-taste ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .recipes-taste li {
-    margin-bottom: 10px;
-    font-weight: 600;
-    /* Semi-Bold */
+  margin-bottom: 10px;
+  font-weight: 600;
+  /* Semi-Bold */
 }
 
 /* Summary Styles */
 .recipes-summary {
-    grid-area: summary;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-
+  grid-area: summary;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .recipes-summary a {
-    color: black;
-    text-decoration: none;
-    pointer-events: none;
+  color: black;
+  text-decoration: none;
+  pointer-events: none;
 }
 
 /* Diets Styles */
 #diets {
-    grid-area: diets;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: diets;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 /* Dish Types Styles */
 #dishTypes {
-    grid-area: dish-types;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: dish-types;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 /* Recipe Steps Styles */
 #recipeSteps {
-    grid-area: recipe-steps;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: recipe-steps;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 #recipeSteps div {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #recipeSteps p {
-    font-weight: 600;
-    /* Semi-Bold */
-    margin-bottom: 10px;
-    color: var(--secondary-color);
+  font-weight: 600;
+  /* Semi-Bold */
+  margin-bottom: 10px;
+  color: var(--secondary-color);
 }
 
 #recipeSteps ul {
-    list-style-type: none;
-    padding-left: 0;
-    display: flex;
-    flex-wrap: wrap;
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #recipeSteps li {
-    margin-right: 20px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 #recipeSteps li img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: var(--box-shadow);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: var(--box-shadow);
 }
 
 /* Nutrition Information Styles */
 .nutrition-container {
-    grid-area: nutrition-info;
-    /*  */
-    max-width: 1200px;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: nutrition-info;
+  /*  */
+  max-width: 1200px;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .nutrition-container h2,
 h3 {
-    margin-top: 0;
-    color: var(--secondary-color);
-    font-weight: 700;
-    /* Bold */
+  margin-top: 0;
+  color: var(--secondary-color);
+  font-weight: 700;
+  /* Bold */
 }
 
 .nutrition-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .nutrition-label {
-    width: 150px;
-    font-weight: 600;
-    color: #378ac2;
+  width: 150px;
+  font-weight: 600;
+  color: #378ac2;
 }
 
 .nutrition-value {
-    width: 120px;
-    font-weight: 600;
+  width: 120px;
+  font-weight: 600;
 }
 
 .nutrition-bar-container {
-    width: calc(100% - 290px);
-    height: 30px;
-    background-color: var(--tertiary-color);
-    margin: 0 10px;
-    overflow: hidden;
-    border-radius: var(--border-radius);
+  width: calc(100% - 290px);
+  height: 30px;
+  background-color: var(--tertiary-color);
+  margin: 0 10px;
+  overflow: hidden;
+  border-radius: var(--border-radius);
 }
 
 .nutrition-bar {
-    height: 100%;
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    transition: width 0.3s ease;
-    position: relative;
+  height: 100%;
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  transition: width 0.3s ease;
+  position: relative;
 }
 
 .nutrition-percent {
-    width: 50px;
-    font-weight: 600;
-    color: rgb(255, 255, 255);
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+  width: 50px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Properties Styles */
 #properties {
-    grid-area: properties;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: properties;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 #properties p {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 /* Caloric Breakdown Styles */
 #caloricBreakdown {
-    grid-area: caloric-breakdown;
-    background-color: var(--box-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+  grid-area: caloric-breakdown;
+  background-color: var(--box-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
-    .title {
-        text-align: center;
-        padding-top: 1rem;
-    }
+  .title {
+    text-align: center;
+    padding-top: 1rem;
+  }
 
-    .recipes-container {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .recipes-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 100%;
+  }
+
+  .recipes-image {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .recipes-taste {
+    width: 100%;
+  }
 }
 
 @media (max-width: 992px) {
-    .title {
-        text-align: center;
-        padding-top: 1rem;
-        margin-left: 20px;
-    }
+  .title {
+    text-align: center;
+    padding-top: 2rem;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
-    .recipes-container {
-        grid-template-areas:
-            "title-image"
-            "taste"
-            "summary"
-            "diets"
-            "dish-types"
-            "recipe-steps"
-            "nutrition-info"
-            "properties"
-            "caloric-breakdown";
-        padding-left: 20px;
-        padding-right: 20px;
-    }
+  .recipes-container {
+    grid-template-areas:
+      "title-image"
+      "taste"
+      "summary"
+      "diets"
+      "dish-types"
+      "recipe-steps"
+      "nutrition-info"
+      "properties"
+      "caloric-breakdown";
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 80px;
+    gap: 15px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .recipes-image {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .recipes-taste {
+    width: 100%;
+  }
+
+  .recipes-title-image h1 {
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .title {
-        text-align: center;
-        padding-top: 1rem;
-        margin-left: 20px;
-    }
+  body {
+    font-size: 90%;
+  }
 
-    .recipes-container {
-        margin-left: 20px;
-    }
+  .title {
+    text-align: center;
+    padding-top: 6rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+  }
 
-    .recipes-title-image h1 {
-        font-size: 2rem;
-    }
+  .title h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
 
-    .nutrition-bar-container {
-        width: calc(100% - 240px);
-    }
+  .recipes-container {
+    margin: 0 auto;
+    margin-left: 0;
+    padding: 10px 5px;
+    gap: 10px;
+  }
+
+  .recipes-title-image {
+    text-align: center;
+  }
+
+  .recipes-title-image h1 {
+    font-size: 1.8rem;
+  }
+
+  .recipes-image {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .recipes-taste {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .recipes-taste h2,
+  .recipes-taste h3 {
+    font-size: 1.3rem;
+  }
+
+  .recipes-taste li {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+
+  .recipes-summary {
+    padding: 15px;
+  }
+
+  .recipes-summary h2 {
+    font-size: 1.3rem;
+  }
+
+  .recipes-summary p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  #diets,
+  #dishTypes,
+  #recipeSteps,
+  #nutritionInfo,
+  #properties,
+  #caloricBreakdown {
+    padding: 15px;
+    width: 100%;
+  }
+
+  #diets h2,
+  #dishTypes h2,
+  #recipeSteps h2,
+  #nutritionInfo h2,
+  #properties h2,
+  #caloricBreakdown h2 {
+    font-size: 1.3rem;
+  }
+
+  .nutrition-bar-container {
+    width: calc(100% - 240px);
+  }
+
+  #recipeSteps div {
+    margin-bottom: 15px;
+  }
 }
 
 @media (max-width: 576px) {
-    .title {
-        text-align: center;
-        padding-top: 1rem;
-        margin-left: 20px;
-    }
+  body {
+    font-size: 80%;
+    overflow-x: hidden;
+  }
 
-    .recipes-container {
-        margin-left: 20px;
-    }
+  .title {
+    text-align: center;
+    padding-top: 5.5rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0;
+  }
 
-    .recipes-title-image h1 {
-        font-size: 1.8rem;
-    }
+  .title h1 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
 
-    .nutrition-item {
-        flex-wrap: wrap;
-    }
+  .recipes-container {
+    margin: 0;
+    padding: 5px 3px;
+    gap: 8px;
+    max-width: 100vw;
+  }
 
-    .nutrition-label {
+  .recipes-title-image {
+    text-align: center;
+  }
 
-        margin-bottom: 5px;
-    }
+  .recipes-title-image h1 {
+    font-size: 1.4rem;
+  }
 
-    .nutrition-value {
-        width: 80x;
-        margin-bottom: 5px;
-    }
+  .recipes-image {
+    width: 100%;
+    max-width: 100vw;
+    max-height: 250px;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
 
-    .nutrition-bar-container {
-        width: calc(100% - 140px);
-    }
+  .recipes-taste {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .recipes-taste h2,
+  .recipes-taste h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .recipes-taste li {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .recipes-taste ul {
+    padding-left: 0;
+  }
+
+  .recipes-summary {
+    padding: 10px;
+  }
+
+  .recipes-summary h2 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .recipes-summary p {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+
+  #diets,
+  #dishTypes,
+  #recipeSteps,
+  #nutritionInfo,
+  #properties,
+  #caloricBreakdown {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  #diets h2,
+  #dishTypes h2,
+  #recipeSteps h2,
+  #nutritionInfo h2,
+  #properties h2,
+  #caloricBreakdown h2 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  #recipeSteps div {
+    margin-bottom: 12px;
+    padding: 10px;
+  }
+
+  #recipeSteps h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  #recipeSteps ol,
+  #recipeSteps ul {
+    padding-left: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  #recipeSteps li {
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .nutrition-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nutrition-label {
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+  }
+
+  .nutrition-value {
+    width: auto;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+  }
+
+  .nutrition-bar-container {
+    width: calc(100% - 140px);
+  }
+
+  .nutrition-bar {
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  #nutritionInfo table {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  #nutritionInfo th,
+  #nutritionInfo td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  #properties {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  #caloricBreakdown {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Ensure touch-friendly buttons and links */
+  button,
+  a {
+    min-height: 44px;
+    padding: 8px 10px;
+  }
 }

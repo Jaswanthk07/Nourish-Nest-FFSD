@@ -230,10 +230,10 @@ app.post("/admin/feedbacks/:id", async (req, res) => {
   if (
     (req.session &&
       req.session.isAuthenticated &&
-      req.session.user === "admin") ||
+      req.session.role === "admin") ||
     (req.cookies &&
       req.cookies.isAuthenticated === "true" &&
-      req.cookies.user === "admin")
+      req.cookies.role === "admin")
   ) {
     const id = req.params.id;
     console.log(id);
@@ -289,8 +289,14 @@ app.get("/recipes/:id", async (req, res) => {
         `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`
       );
       const recipes = response.data;
-      const recipeSteps = recipes.analyzedInstructions[0].steps;
-      const nutrition = recipes.nutrition;
+      // Guard against missing analyzedInstructions
+      const recipeSteps =
+        recipes.analyzedInstructions &&
+        recipes.analyzedInstructions.length > 0 &&
+        Array.isArray(recipes.analyzedInstructions[0].steps)
+          ? recipes.analyzedInstructions[0].steps
+          : [];
+      const nutrition = recipes.nutrition || {};
       res.render("recipes", {
         recipes,
         recipeSteps,
@@ -306,6 +312,12 @@ app.get("/recipes/:id", async (req, res) => {
     console.error("Error fetching recipe data:", error);
     res.status(500).send("Error fetching recipe data");
   }
+});
+
+// Generic error handler to catch unexpected errors and log stack traces
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err && err.stack ? err.stack : err);
+  res.status(500).send("Internal Server Error");
 });
 
 app.post("/logout", (req, res) => {
