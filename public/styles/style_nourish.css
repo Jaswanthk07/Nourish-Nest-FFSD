@@ -36,6 +36,61 @@
   background: #29d978;
   color: #fff;
 }
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .user-dropdown {
+    position: relative;
+  }
+
+  /* Make the dropdown full-width and easy to tap on mobile */
+  .user-menu {
+    position: fixed;
+    top: 6rem; /* below navbar */
+    right: 1rem;
+    left: 1rem;
+    min-width: auto;
+    width: auto;
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    margin-top: 0;
+    z-index: 2000;
+  }
+
+  .user-menu form .si,
+  .user-menu form .logout-btn {
+    width: 100%;
+    margin: 0.35rem 0;
+    padding: 1rem 1.2rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .user-dropdown .si {
+    padding: 1rem 1.2rem;
+    font-size: 1.6rem;
+  }
+
+  /* Ensure nav links remain tappable */
+  nav a {
+    padding: 0 16px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-menu {
+    top: 5.5rem;
+    right: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .user-menu form .si,
+  .user-menu form .logout-btn {
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+}
 }
 
 nav {
