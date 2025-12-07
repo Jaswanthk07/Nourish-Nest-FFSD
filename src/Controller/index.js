@@ -127,14 +127,24 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-    const { Firstname, Lastname, email, password, role } = req.body;
+    const { Firstname, Lastname, email, password, repassword, role } = req.body;
     try {
-        const result = await signUp(Firstname, Lastname, email, password, role);
+        // Validate passwords match
+        if (password !== repassword) {
+            return res.send("Passwords don't match");
+        }
+        
+        // Check if passwords are empty
+        if (!password || password.trim() === "") {
+            return res.send("Password cannot be empty");
+        }
+
+        const result = await signUp(Firstname, Lastname, email, password);
         if (result.success) {
             req.session.user = Firstname;
             req.session.isAuthenticated = true;
             res.cookie('user', Firstname, { maxAge: 900000, httpOnly: true });
-            res.cookie('role', role, { maxAge: 900000, httpOnly: true });
+            res.cookie('role', role || 'user', { maxAge: 900000, httpOnly: true });
             res.cookie('isAuthenticated', 'true', { maxAge: 900000, httpOnly: true });
             console.log(req.session.user);
             res.redirect("/index?role=user");
@@ -143,6 +153,9 @@ app.post("/signup", async (req, res) => {
         }
     } catch (error) {
         console.error("Error signing up:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
         res.status(500).send("An error occurred while signing up.");
     }
 });
