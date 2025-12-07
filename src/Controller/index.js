@@ -56,21 +56,32 @@ const connectDB = async (url) => {
 };
 connectDB(db_url);
 
+// Helper function to get user data from session/cookies
+function getUserData(req) {
+  let Firstname = "Guest";
+  let role = "guest";
+  let isAuthenticated = false;
+
+  if (req.session && req.session.user) {
+    Firstname = req.session.user;
+    role = req.session.role || "user";
+    isAuthenticated = req.session.isAuthenticated || false;
+  } else if (req.cookies && req.cookies.user) {
+    Firstname = req.cookies.user;
+    role = req.cookies.role || "user";
+    isAuthenticated = req.cookies.isAuthenticated === "true";
+  }
+
+  return { Firstname, role, isAuthenticated };
+}
+
 app.get("/", (req, res) => {
-  res.redirect("/index?role=guest");
+  res.redirect("/index");
 });
 
 app.get("/index", (req, res) => {
-  let Firstname = "Guest";
-  let role = req.query.role || "guest";
-  if (req.session && req.session.user) {
-    Firstname = req.session.user;
-  } else if (req.cookies && req.cookies.user) {
-    Firstname = req.cookies.user;
-  }
-  const isAuthenticated =
-    req.session?.isAuthenticated || req.cookies?.isAuthenticated === "true";
-  res.render("index", { Firstname, isAuthenticated });
+  const { Firstname, role, isAuthenticated } = getUserData(req);
+  res.render("index", { Firstname, isAuthenticated, role });
 });
 
 app.get("/login", (req, res) => {
@@ -85,47 +96,13 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/nourish", (req, res) => {
-  if (
-    (req.session && req.session.isAuthenticated) ||
-    (req.cookies && req.cookies.isAuthenticated === "true")
-  ) {
-    res.redirect("/nourish&role=user");
-  } else {
-    res.redirect("/nourish&role=guest");
-  }
-});
-
-app.get("/nourish&role=user", (req, res) => {
-  const isAuthenticated =
-    (req.session && req.session.isAuthenticated) ||
-    (req.cookies && req.cookies.isAuthenticated === "true");
-  res.render("nourish", { isAuthenticated });
-});
-
-app.get("/nourish&role=guest", (req, res) => {
-  const isAuthenticated =
-    (req.session && req.session.isAuthenticated) ||
-    (req.cookies && req.cookies.isAuthenticated === "true");
-  res.render("nourish", { isAuthenticated });
+  const { Firstname, role, isAuthenticated } = getUserData(req);
+  res.render("nourish", { isAuthenticated, Firstname, role });
 });
 
 app.get("/about", (req, res) => {
-  if (
-    (req.session && req.session.isAuthenticated) ||
-    (req.cookies && req.cookies.isAuthenticated === "true")
-  ) {
-    res.redirect("/about&role=user");
-  } else {
-    res.redirect("/about&role=guest");
-  }
-});
-
-app.get("/about&role=user", (req, res) => {
-  res.render("about");
-});
-
-app.get("/about&role=guest", (req, res) => {
-  res.render("about");
+  const { Firstname, role, isAuthenticated } = getUserData(req);
+  res.render("about", { isAuthenticated, Firstname, role });
 });
 
 app.post("/login", async (req, res) => {
@@ -147,7 +124,7 @@ app.post("/login", async (req, res) => {
       });
       res.cookie("isAuthenticated", "true", { maxAge: 900000, httpOnly: true });
       console.log(req.session.user);
-      res.redirect("/index?role=user");
+      res.redirect("/index");
     } else {
       console.log(loginResult.message);
       res.status(400).send("Invalid email or password");
@@ -180,7 +157,7 @@ app.post("/signup", async (req, res) => {
       res.cookie("role", "user", { maxAge: 900000, httpOnly: true });
       res.cookie("isAuthenticated", "true", { maxAge: 900000, httpOnly: true });
       console.log(req.session.user);
-      res.redirect("/index?role=user");
+      res.redirect("/index");
     } else {
       res.send(result.message);
     }
@@ -210,10 +187,10 @@ app.get("/admin", async (req, res) => {
     if (
       (req.session &&
         req.session.isAuthenticated &&
-        req.session.user === "admin") ||
+        req.session.role === "admin") ||
       (req.cookies &&
         req.cookies.isAuthenticated === "true" &&
-        req.cookies.user === "admin")
+        req.cookies.role === "admin")
     ) {
       const users = await getNourishusers();
       const feedbacks = await getAllFeedbacks();
@@ -231,10 +208,10 @@ app.post("/admin/:id", async (req, res) => {
   if (
     (req.session &&
       req.session.isAuthenticated &&
-      req.session.user === "admin") ||
+      req.session.role === "admin") ||
     (req.cookies &&
       req.cookies.isAuthenticated === "true" &&
-      req.cookies.user === "admin")
+      req.cookies.role === "admin")
   ) {
     const id = req.params.id;
     console.log(id);
@@ -273,10 +250,8 @@ app.post("/admin/feedbacks/:id", async (req, res) => {
 
 app.get("/mealplan", async (req, res) => {
   try {
-    if (
-      (req.session && req.session.isAuthenticated) ||
-      (req.cookies && req.cookies.isAuthenticated === "true")
-    ) {
+    const { Firstname, role, isAuthenticated } = getUserData(req);
+    if (isAuthenticated) {
       const apiKey = "236eda03c9c04e22bd7f7ec803985287";
       const hash = "4b5v4398573406";
       const diet = req.query.diet || "Gulten Free";
@@ -294,7 +269,7 @@ app.get("/mealplan", async (req, res) => {
       }
       const response = await axios.get(apiUrl);
       const mealPlan = response.data;
-      res.render("mealplan", { mealPlan });
+      res.render("mealplan", { mealPlan, Firstname, role, isAuthenticated });
     } else {
       res.render("permission");
     }
@@ -306,10 +281,8 @@ app.get("/mealplan", async (req, res) => {
 
 app.get("/recipes/:id", async (req, res) => {
   try {
-    if (
-      (req.session && req.session.isAuthenticated) ||
-      (req.cookies && req.cookies.isAuthenticated === "true")
-    ) {
+    const { Firstname, role, isAuthenticated } = getUserData(req);
+    if (isAuthenticated) {
       const apiKey = "9ca54163f3764560a75ecba555e0d379";
       const recipeId = req.params.id;
       const response = await axios.get(
@@ -318,7 +291,14 @@ app.get("/recipes/:id", async (req, res) => {
       const recipes = response.data;
       const recipeSteps = recipes.analyzedInstructions[0].steps;
       const nutrition = recipes.nutrition;
-      res.render("recipes", { recipes, recipeSteps, nutrition });
+      res.render("recipes", {
+        recipes,
+        recipeSteps,
+        nutrition,
+        Firstname,
+        role,
+        isAuthenticated,
+      });
     } else {
       res.render("permission");
     }
@@ -328,13 +308,28 @@ app.get("/recipes/:id", async (req, res) => {
   }
 });
 
-app.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.clearCookie("user");
-  res.clearCookie("role");
-  res.clearCookie("isAuthenticated");
-  res.redirect("/login");
-  console.log("You have logged out !!!");
+app.post("/logout", (req, res) => {
+  // destroy session and then clear cookies + redirect to homepage
+  if (req.session) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session during logout:", err);
+        // still attempt to clear cookies and redirect
+      }
+      res.clearCookie("user");
+      res.clearCookie("role");
+      res.clearCookie("isAuthenticated");
+      console.log("You have logged out !!!");
+      // redirect to homepage so user sees logged-out state
+      return res.redirect("/index");
+    });
+  } else {
+    res.clearCookie("user");
+    res.clearCookie("role");
+    res.clearCookie("isAuthenticated");
+    console.log("You have logged out (no session) !!!");
+    return res.redirect("/index");
+  }
 });
 
 app.listen(3000, () => {

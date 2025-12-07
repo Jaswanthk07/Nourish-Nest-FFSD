@@ -1,36 +1,41 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
 
-* {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  text-decoration: none;
-  text-transform: capitalize;
-  transition: 0.2s linear;
+/* Dropdown background aligned with nav (transparent white feel) */
+.user-menu {
+  background: #fff;
+  color: #333;
+  border-radius: 0.5rem;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(41,217,120,0.12);
 }
 
-html {
-  font-size: 75%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+/* Make dropdown logout button visually match the top navbar .si button */
+.user-menu form .si,
+.user-menu form .logout-btn {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0.4rem 1rem;
+  padding: 0.9rem 1.2rem;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  color: #29d978;
+  background: transparent;
+  border: 0.1rem solid #29d978;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: none;
 }
 
-html::-webkit-scrollbar {
-  width: 0.5rem;
+.user-menu form .si:hover,
+.user-menu form .logout-btn:hover {
+  background: #29d978;
+  color: #fff;
 }
-
-section {
-  padding: 4rem 9%;
-}
-
-vh rem body {
-  min-height: 100vh;
-  background-color: #1a1a1a;
-  /* Dark gray */
 }
 
 nav {
@@ -237,6 +242,40 @@ button[type="submit"]:hover {
   line-height: 1.4;
 }
 
+/* Enhanced Dropdown and Logout Button Styles */
+.user-menu {
+  background: #191970;
+  color: #fff;
+  border-radius: 0.5rem;
+  min-width: 180px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  border: 1px solid #29d978;
+}
+
+.logout-btn {
+  background: #29d978;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  margin: 0.5rem 1rem;
+  width: calc(100% - 2rem);
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(41, 217, 120, 0.08);
+}
+
+.logout-btn:hover {
+  background: #191970;
+  color: #29d978;
+  border: 1px solid #29d978;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {
@@ -358,9 +397,23 @@ button[type="submit"]:hover {
   font-weight: 500;
   transition: 0.2s linear;
   width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .logout-btn:hover {
   background-color: #f0f0f0;
   color: #e74c3c;
+}
+
+.user-menu form {
+  margin: 0;
+  width: 100%;
+}
+
+.user-menu form button {
+  margin: 0;
 }
