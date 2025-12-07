@@ -198,7 +198,7 @@ http://localhost:3000
 
 For testing the admin panel:
 ```
-Username: admin@nourishnest.com
+Username: admin@nourish.com
 Password: admin123
 ```
 > ⚠️ **Important:** Change these credentials in production!
