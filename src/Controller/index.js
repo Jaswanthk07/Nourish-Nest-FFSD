@@ -106,32 +106,101 @@ app.get("/about", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const loginResult = await logIn(email, password);
-    if (loginResult.success) {
-      console.log("You have successfully logged in");
-      req.session.user = loginResult.message;
-      req.session.isAuthenticated = true;
-      req.session.role = loginResult.role;
-      res.cookie("user", loginResult.message, {
-        maxAge: 900000,
-        httpOnly: true,
+    // STEP 1: Validate inputs exist and are non-empty
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      console.warn("[LOGIN] Attempt with missing email or password");
+      return res.status(400).render("login", { 
+        error: "Email and password are required" 
       });
-      res.cookie("role", loginResult.role, {
-        maxAge: 900000,
-        httpOnly: true,
-      });
-      res.cookie("isAuthenticated", "true", { maxAge: 900000, httpOnly: true });
-      console.log(req.session.user);
-      res.redirect("/index");
-    } else {
-      console.log(loginResult.message);
-      res.status(400).send("Invalid email or password");
     }
+
+    // STEP 2: Trim whitespace (mobile browsers may send extra spaces)
+    const trimmedEmail = String(email).trim();
+    const trimmedPassword = String(password).trim();
+
+    if (trimmedEmail.length === 0 || trimmedPassword.length === 0) {
+      return res.status(400).render("login", { 
+        error: "Email and password cannot be empty" 
+      });
+    }
+
+    // STEP 3: Call logIn with validated inputs
+    console.log(`[LOGIN] Attempting login for: ${trimmedEmail}`);
+    const loginResult = await logIn(trimmedEmail, trimmedPassword);
+
+    // STEP 4: Check if login succeeded
+    if (!loginResult || !loginResult.success) {
+      const errorMsg = loginResult?.message || "Invalid email or password";
+      console.warn(`[LOGIN FAILED] ${errorMsg}`);
+      return res.status(401).render("login", { 
+        error: errorMsg 
+      });
+    }
+
+    // STEP 5: Validate loginResult structure before setting session
+    if (!loginResult.message || !loginResult.role) {
+      console.error("[LOGIN ERROR] Incomplete user data from logIn():", {
+        success: loginResult.success,
+        hasMessage: !!loginResult.message,
+        hasRole: !!loginResult.role,
+      });
+      return res.status(500).render("login", { 
+        error: "Server error: incomplete user data. Please try again." 
+      });
+    }
+
+    // STEP 6: Set session data (primary auth mechanism)
+    req.session.user = loginResult.message; // Firstname
+    req.session.isAuthenticated = true;
+    req.session.role = loginResult.role; // 'admin' or 'user'
+
+    // STEP 7: Set cookies as backup (for mobile browser persistence)
+    res.cookie("user", loginResult.message, {
+      maxAge: 900000,
+      httpOnly: true,
+      sameSite: "lax",
+    });
+    res.cookie("role", loginResult.role, {
+      maxAge: 900000,
+      httpOnly: true,
+      sameSite: "lax",
+    });
+    res.cookie("isAuthenticated", "true", { 
+      maxAge: 900000, 
+      httpOnly: true,
+      sameSite: "lax",
+    });
+
+    // STEP 8: Save session before redirect (CRITICAL for mobile)
+    req.session.save((err) => {
+      if (err) {
+        console.error("[SESSION SAVE ERROR]", err);
+        return res.status(500).render("login", { 
+          error: "Session error: Please try logging in again" 
+        });
+      }
+
+      // STEP 9: Log successful login (safe - no password)
+      console.log(`[LOGIN SUCCESS] User: ${loginResult.message}, Role: ${loginResult.role}`);
+
+      // STEP 10: Redirect to index (session is now persisted)
+      res.redirect("/index");
+    });
+
   } catch (error) {
-    console.error("An error occurred while logging in:", error);
-    res.status(500).send("An error occurred while logging in");
+    // Catch ANY unhandled errors (async issues, JSON parse, etc.)
+    console.error("[LOGIN EXCEPTION]", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    });
+
+    return res.status(500).render("login", { 
+      error: "An unexpected error occurred. Please try again later." 
+    });
   }
 });
 
