@@ -68,16 +68,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/index", (req, res) => {
-  let Firstname;
+  let Firstname = "Guest";
   let role = req.query.role || "guest";
   if (req.session && req.session.user) {
     Firstname = req.session.user;
   } else if (req.cookies && req.cookies.user) {
     Firstname = req.cookies.user;
-  } else {
-    Firstname = "Guest";
   }
-  res.render("index", { Firstname });
+  const isAuthenticated =
+    req.session?.isAuthenticated || req.cookies?.isAuthenticated === "true";
+  res.render("index", { Firstname, isAuthenticated });
 });
 
 app.get("/login", (req, res) => {
