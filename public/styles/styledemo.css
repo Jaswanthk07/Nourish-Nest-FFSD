@@ -134,6 +134,17 @@ body {
   transition: 0.5s ease-in-out;
 }
 
+/* Scoped styles: only affect the submit button inside the register (signup) form */
+#register .submit,
+.register-container .submit {
+  border-radius: 9999px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+}
+
 .top span {
   color: #4e342e;
   font-size: small;
@@ -349,6 +360,7 @@ header {
     font-size: 0.9rem;
     height: 38px;
     margin-top: 8px;
+    width: 100%;
     border-radius: 22px;
   }
 }
@@ -617,3 +629,36 @@ header {
 </body>
 
 </html> */
+
+/* Signup-only overrides (placed at end to override earlier .submit rules)
+   These only affect the submit inside the register container */
+.register-container .submit,
+#register .submit {
+  border-radius: 9999px !important;
+  height: 50px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 18px !important;
+}
+
+@media only screen and (max-width: 786px) {
+  .register-container .submit,
+  #register .submit {
+    height: 40px !important;
+    border-radius: 22px !important;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .register-container .submit,
+  #register .submit {
+    height: 38px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* Scoped styles: prevent clipping for the signup form */
+.register-container .form-box {
+  overflow: visible;
+}
